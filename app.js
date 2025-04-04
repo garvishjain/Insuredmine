@@ -27,32 +27,6 @@ mongoose.connect(uri,{
   .then(()=>console.log('MongoDB Connected'))
   .catch((err)=>console.log("Mongo error",err))
 
-/** Upload API using Worker Threads */
-// app.post('/upload', upload.single('file'), (req, res) => {
-//   const worker = new Worker('./worker.js', { workerData: req.file.path });
-//   worker.on('message', (msg) => res.json({ status: 'success', msg }));
-//   worker.on('error', (err) => res.status(500).json({ error: err.message }));
-// });
-
-/** Search Policy Info by Username*/
-// app.get('/search', async (req, res) => {
-//   const users = await user.findOne({ firstName: req.query.username });
-//   if (!users) return res.status(404).json({ error: 'User not found' });
-//   const policies = await policy.find({ userId: users._id });
-//   if(!policies) return res.status(404).json({ error: 'Policies not found' });
-//   res.json(policies);
-// });
-
-/** Aggregation API for Policies by User */
-// app.get('/aggregate/policies', async (req, res) => {
-//   const result = await policy.aggregate([
-//     { $group: { _id: '$userId', totalPolicies: { $sum: 1 } } }
-//   ]);
-//   if(!result) return res.status(404).json({ error: 'Not found' });
-//   res.json(result);
-// });
-
-
 /** Monitor CPU Usage and Restart Server */
 setInterval(() => {
   const cpuUsage = os.loadavg()[0];
