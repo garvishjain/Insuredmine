@@ -16,6 +16,6 @@ Routes.route('/aggregate/policies').get(AggregatePolicyController.AggregatePolic
 
 
 /** scheduler Message Api */
-Routes.route('/schedule-message').get(ScheduleMessageController.ScheduleMessage)
+Routes.route('/schedule-message').post(ScheduleMessageController.ScheduleMessage)
 
 module.exports= Routes;
