@@ -9,7 +9,7 @@ module.exports = class AggregatePolicyController{
                 { $group: { _id: '$userId', totalPolicies: { $sum: 1 } } }
             ]);
             if(!result) return res.status(404).json({ error: 'Not found' });
-            res.json(result);    
+            res.status(200).json(result);    
         } catch (error) {
             console.log(error);
             throw error;            
