@@ -10,6 +10,7 @@ const userSchema = new mongoose.Schema({
   email: String,
   gender: String,
   userType: String,
+  agentId: mongoose.Schema.Types.ObjectId,
 });
 
 const user = mongoose.model('users', userSchema);

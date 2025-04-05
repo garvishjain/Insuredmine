@@ -2,4 +2,6 @@ const mongoose = require('mongoose');
 
 const agentSchema = new mongoose.Schema({ name: String });
 
-module.exports = agentSchema;
+const agent = mongoose.model('agent', agentSchema);
+
+module.exports = agent;

@@ -5,6 +5,7 @@ const users = require('./routes/schemas/userSchema');
 const policy = require('./routes/schemas/policySchema');
 const company = require('./routes/schemas/carrierSchema');
 const catagory = require('./routes/schemas/lobSchema');
+const agent = require('./routes/schemas/agentSchema');
 
 const uri = "mongodb+srv://garvishjain1997:Garvishinsuredmine@insuredmine.aiho7ag.mongodb.net/?retryWrites=true&w=majority&appName=Insuredmine";
 
@@ -29,8 +30,12 @@ const { parentPort, workerData } = require('worker_threads');
     if(data.length > 0){
       headerRows = data[0].map(cell => cell.toLowerCase());
       for (const row of data.slice(1)) {
-        let [firstname,dob,address,phonenumber,state,zipcode,email,gender,usertype,policyNumber,policyStartDate,policyEndDate,policyCategory,companyname] = row;
-      
+        let [firstname,dob,address,phonenumber,state,zipcode,email,gender,usertype,policyNumber,policyStartDate,policyEndDate,policyCategory,companyname,agentName] = row;
+        let agentData = await agent.findOneAndUpdate(
+          { name: agentName },
+          { $set: { name: agentName } },
+          { new: true, upsert: true }
+        );
         let excelData = {
           firstName: firstname,
           DOB: dob,
@@ -40,8 +45,9 @@ const { parentPort, workerData } = require('worker_threads');
           zipCode: zipcode,
           email: email,
           gender: gender,
-          userType: usertype
-        }   
+          userType: usertype,
+          agentId: agentData._id
+        }
         let user = await users.findOneAndUpdate(
           { firstName: firstname },
           { $set: excelData },
