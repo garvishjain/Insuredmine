@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
-const messageSchema = new mongoose.Schema({ message: String, insertAt: Date });
+const messageSchema = new mongoose.Schema({
+    message: String,
+    scheduledAt: Date,
+    inserted: { type: Boolean, default: false }}
+);
 
 const messages = mongoose.model('messages', messageSchema);
 
